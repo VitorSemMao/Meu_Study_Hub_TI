@@ -46,10 +46,8 @@ Meu_Study_Hub_TI/
 ## Links
 
 - [LinkedIn](https://www.linkedin.com/in/vitorpereiracosta)
-- Documento-base no Google Docs: a adicionar
-- Vídeo de apresentação no YouTube: a adicionar
+- [Documento-base no Google Docs](https://docs.google.com/document/d/1kRJKFP9xPF8Sesa6ZB-fYoq79UTG-1btljUp3Auig9Q/edit?usp=sharing)
 
 ## Contato
 
 Vitor Pereira da Costa - [vitor.pcosta04@gmail.com](mailto:vitor.pcosta04@gmail.com)
-
