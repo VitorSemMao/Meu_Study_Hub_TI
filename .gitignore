@@ -1,0 +1,19 @@
+# Arquivos temporários do sistema e dos editores
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+~$*
+
+# Segredos e configurações locais
+.env
+.env.*
+!.env.example
+
+# Saídas de ferramentas e dependências
+__pycache__/
+node_modules/
+.venv/
+dist/
+build/
+
