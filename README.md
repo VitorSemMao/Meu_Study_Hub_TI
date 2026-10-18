@@ -51,3 +51,14 @@ Meu_Study_Hub_TI/
 ## Contato
 
 Vitor Pereira da Costa - [vitor.pcosta04@gmail.com](mailto:vitor.pcosta04@gmail.com)
+
+## Página web - versão 1.0
+
+[Acessar o Study Hub no GitHub Pages](https://vitorsemmao.github.io/Meu_Study_Hub_TI/)
+
+Projeto inicial implementado em HTML5 e CSS3, com layout responsivo, perfil, navegação por seções e links para os materiais. Abra `index.html` no navegador para executar localmente; não há dependências.
+
+- [Planejamento, publicação e versionamento](PLANEJAMENTO.md)
+- [Guia de colaboração](CONTRIBUTING.md)
+
+As áreas de API REST, laboratórios e automação são planejamentos; ainda não representam implementações concluídas neste repositório.
