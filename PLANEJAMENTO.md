@@ -1,44 +1,25 @@
 # Planejamento do Study Hub TI
 
-## Objetivo e público
-Centralizar os materiais acadêmicos e apresentar a evolução profissional de Vitor Pereira da Costa a colegas, professores e recrutadores.
+## Objetivo
+Reunir os materiais da graduação e apresentar os projetos de Vitor Pereira da Costa em um portfólio público.
 
-## Estrutura
-- `01_Apresentacao_e_Perfil/`: biografia, formação e competências.
-- `02_Disciplinas_Atuais/`: uma pasta por disciplina; Bootcamp I separa anotações e entregas.
-- `03_Projetos_e_Certificados/`: projetos por tema e certificados. As áreas sem implementação permanecem identificadas como planejamento.
-- `index.html`: página pública do portfólio, versão 1.0.
-- `README.md`: índice e instruções gerais.
-- `CONTRIBUTING.md`: fluxo de colaboração e revisão.
+## Organização
+- `01_Apresentacao_e_Perfil/`: formação, trajetória e competências.
+- `02_Disciplinas_Atuais/`: materiais separados por disciplina.
+- `03_Projetos_e_Certificados/`: projetos por área e certificados.
+- `index.html`, `styles.css` e `app.js`: página do PortfolioHUB.
+- `tests/`: testes do catálogo.
 
-## Projeto inicial: página Study Hub
-Tecnologias: HTML5 e CSS3, sem dependências de execução, banco de dados ou coleta de dados. Layout responsivo, navegação por âncoras e links para o GitHub e LinkedIn.
+## Etapas
+A primeira etapa definiu a estrutura de pastas. A versão 1.0 publicou o perfil e os links no GitHub Pages. A versão 2.0 acrescentou a consulta às áreas do repositório, a busca e as medidas de segurança descritas em SECURITY.md.
 
-### Execução local
-Clone o repositório com `git clone https://github.com/VitorSemMao/Meu_Study_Hub_TI.git`, entre no diretório e abra `index.html` no navegador. Opcionalmente execute `python3 -m http.server 8000` e visite `http://localhost:8000`.
+## Execução
+Clone o repositório e execute `python3 -m http.server 8000` na pasta do projeto. Abra http://localhost:8000. Os testes são executados com `node --test tests/catalog.test.cjs`.
 
-### Publicação
-Em Settings > Pages, selecionar Deploy from a branch, branch `main`, pasta `/ (root)`. O endereço esperado é https://vitorsemmao.github.io/Meu_Study_Hub_TI/ . A publicação só está concluída após o build do Pages e a verificação do site.
+## Atualizações
+As alterações devem ser feitas em uma branch e enviadas por pull request. Antes da integração, conferir o diff, executar os testes e verificar os links. Depois, acompanhar a publicação do GitHub Pages.
 
-## Versionamento
-- A estrutura inicial e a atualização dos links já possuem commits próprios.
-- A primeira versão da página é identificada como v1.0.
-- Mudanças posteriores devem usar commits pequenos com mensagens descritivas: `feat:`, `fix:` e `docs:`.
-- Alterações colaborativas passam por branch, pull request e revisão antes do merge.
-- Nunca reescrever o histórico para simular datas ou contribuições.
+Cada novo projeto deve ter README com objetivo, tecnologias, instruções de execução e estágio de desenvolvimento. As pastas ainda sem implementação devem ser identificadas como planejadas.
 
-## Critérios de revisão
-Verificar navegação, links, contraste, leitura em dispositivos móveis, identificação de projetos planejados e ausência de credenciais/dados de clientes.
-
-## Integração profissional
-O site e o README apontam para o LinkedIn informado no perfil. Para a integração no sentido LinkedIn → GitHub, adicionar o projeto Study Hub TI em Projetos ou Destaques do LinkedIn, com o endereço do repositório e do site publicado. Essa edição de perfil deve ser confirmada na própria plataforma; o link de saída sozinho não comprova a inclusão no LinkedIn.
-# Como contribuir
-
-1. Abra uma issue descrevendo o problema ou a melhoria, com o resultado esperado.
-2. Crie uma branch a partir de `main`: `git switch -c docs/descricao-curta` (ou `feat/` e `fix/`).
-3. Faça mudanças pequenas e revise com `git diff`.
-4. Verifique o site no navegador em uma janela larga e em uma estreita; teste links e navegação por teclado.
-5. Registre um commit descritivo e envie a branch.
-6. Abra um pull request explicando a mudança e a validação. Aguarde revisão antes do merge.
-
-Documente cada novo projeto com objetivo, tecnologias, como executar, entradas/saídas, testes e limitações. Não publique senhas, tokens, dados de clientes ou materiais sem autorização. Use exemplos fictícios em laboratórios e respeite o escopo autorizado.
+## Perfil profissional
+O site e o README apresentam os links do GitHub e do LinkedIn. A inclusão do projeto no próprio perfil do LinkedIn é uma configuração separada.
