@@ -1,20 +1,20 @@
 # PortfolioHUB 2.0 - Implantação
 
 ## Escopo
-Portfólio estático com catálogo integrado à API pública de conteúdos do GitHub. O GitHub armazena projetos e controla escrita; o Pages publica a interface. O Google Docs mantém o plano; o Gemini apoia a análise. Não há backend próprio nem autenticação OAuth no site.
+Portfólio estático com catálogo integrado à API pública de conteúdos do GitHub. O GitHub armazena projetos e controla escrita; o Pages publica a interface. O plano está registrado no Google Docs. Não há backend próprio nem autenticação OAuth no site.
 
 ## Arquitetura
 Visitante → GitHub Pages (index.html, styles.css, app.js) → GET da API de conteúdos → nomes e links validados → cartões pesquisáveis.
 Mantenedor → sessão GitHub → arquivos e commits → publicação Pages.
 Documentação: Google Docs com acesso separado. O PDF reúne as evidências para avaliação sem depender de acesso ao documento restrito.
 
-## Plano e aceite
+## Etapas da implantação
 1. Inventariar a versão inicial e preservar diretórios existentes.
-2. Consultar o Gemini sobre riscos e registrar decisões no diário de IA.
+2. Registrar a consulta ao Gemini solicitada no desafio.
 3. Implementar catálogo e busca, com CSP, validação e fallback.
 4. Registrar perfis e configurar/verificar controles do repositório.
 5. Executar testes locais e revisar a interface publicada.
-6. Consolidar relatório PDF e solicitar confirmação antes do envio acadêmico.
+6. Documentar a implantação e os resultados dos testes.
 
 ## Execução local e testes
 Requer Node.js 18+ para testes e Python 3 para servir o site. Sem instalação de dependências.
@@ -36,10 +36,11 @@ Para adicionar uma área ao catálogo, crie uma pasta em 03_Projetos_e_Certifica
 Produção: branch main, GitHub Pages / (root), HTTPS. Confira a execução pages build and deployment e o site antes de considerar a publicação concluída.
 Para desfazer uma alteração defeituosa: `git revert <commit>` em branch de correção, revisar, integrar e acompanhar novo deploy. Evite reset/force push no histórico compartilhado. Base anterior à etapa final: b216dd27ef490e92cdfeb77960e9b94b0ecdb1b9.
 
-## Google Workspace e IA
+## Documentação
 Plano: https://docs.google.com/document/d/1zrEGSeCVADGMdx7wILnB9LIeF8Bndz2O2YPLFJth63M/edit
 O acesso é restrito às permissões do documento. Não há OAuth Workspace ou sincronização bidirecional: a integração é documental, com link no portal e histórico próprio.
-Gemini: https://gemini.google.com/app/0b1286ec97baede1 (conta proprietária). A IA foi apoio consultivo, não mecanismo que concede permissões ou comprova conformidade. Consulte DIARIO_IA.md para decisões aceitas e rejeitadas.
+A consulta ao Gemini solicitada no desafio está registrada em DIARIO_IA.md.
 
 ## Segurança e colaboração
-Consulte SECURITY.md e CONTRIBUTING.md. O relatório final distingue controles verificados, recomendações e limitações. O vídeo de cinco minutos permanece pendente; um roteiro não equivale ao vídeo solicitado no enunciado.
+Consulte SECURITY.md para os controles aplicados e CONTRIBUTING.md para o fluxo de contribuição.
+
