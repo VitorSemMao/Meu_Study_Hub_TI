@@ -1,0 +1,22 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const {normalizeEntries,fetchProjects,renderProjects,initialize,API}=require('../app.js');
+const item=(name='API_REST_Academica')=>({type:'dir',name,path:'03_Projetos_e_Certificados/'+name});
+function dom(){
+ class Element{constructor(tag){this.tagName=tag;this.children=[];this.attributes={};this.value='';this.disabled=true;this.listeners={};}append(...nodes){this.children.push(...nodes);}replaceChildren(...nodes){this.children=nodes;}setAttribute(k,v){this.attributes[k]=v;}addEventListener(k,v){this.listeners[k]=v;}}
+ const ids=Object.fromEntries(['catalogo','catalogo-status','buscar-projeto'].map(k=>[k,new Element('div')]));
+ return {ids,createElement:tag=>new Element(tag),getElementById:id=>ids[id]};
+}
+test('diretórios válidos são normalizados e ordenados',()=>{const result=normalizeEntries([item(),item('Certificados'),{type:'file',name:'README.md'}]);assert.equal(result.length,2);assert.equal(result[0].title,'API REST acadêmica');assert.match(result[0].url,/^https:\/\/github.com\/VitorSemMao\/Meu_Study_Hub_TI\/tree\/main\//);});
+test('nomes e caminhos adversariais são rejeitados',()=>{for(const name of ['../x','<img src=x onerror=alert(1)>','javascript:alert(1)','x/y','a'.repeat(101),''])assert.equal(normalizeEntries([item(name)]).length,0);assert.equal(normalizeEntries([{...item(),path:'outra/pasta'}]).length,0);});
+test('URLs recebidas da API não controlam os links',()=>{const [r]=normalizeEntries([{...item(),html_url:'javascript:alert(1)',download_url:'https://evil.invalid'}]);assert.equal(r.url,'https://github.com/VitorSemMao/Meu_Study_Hub_TI/tree/main/03_Projetos_e_Certificados/API_REST_Academica');});
+test('estrutura JSON inválida ou excessiva falha de modo explícito',()=>{for(const data of [null,{},'text',Array(1001).fill(item())])assert.throws(()=>normalizeEntries(data));});
+test('consulta fixa omite credenciais e utiliza somente um fetch',async()=>{let n=0;await fetchProjects(async(url,options)=>{n++;assert.equal(url,API);assert.equal(options.credentials,'omit');assert.equal(options.headers.Authorization,undefined);return {ok:true,json:async()=>[item()]};});assert.equal(n,1);});
+for(const code of [403,429,500,404])test('HTTP '+code+' é tratado',async()=>{await assert.rejects(fetchProjects(async()=>({ok:false,status:code})));});
+test('erro de rede e JSON malformado são tratados',async()=>{await assert.rejects(fetchProjects(async()=>{throw Error('network');}));await assert.rejects(fetchProjects(async()=>({ok:true,json:async()=>{throw Error('bad-json');}})));});
+test('timeout limita inclusive promessa que não resolve',async()=>{const start=Date.now();await assert.rejects(fetchProjects(()=>new Promise(()=>{}),15),/timeout/);assert.ok(Date.now()-start<1000);});
+test('renderização cria texto e links sem interpretar HTML',()=>{const doc=dom();const target=doc.ids.catalogo;const n=renderProjects(doc,target,[{title:'<img onerror=alert(1)>',url:'https://github.com/seguro'}],'');assert.equal(n,1);assert.equal(target.children[0].children[1].textContent,'<img onerror=alert(1)>');assert.equal(target.children[0].children[1].children.length,0);});
+test('busca normaliza caixa e espaços e trata nenhum resultado',()=>{const d=dom();const entries=normalizeEntries([item(),item('Certificados')]);assert.equal(renderProjects(d,d.ids.catalogo,entries,' REST '),1);assert.equal(renderProjects(d,d.ids.catalogo,entries,'inexistente'),0);assert.match(d.ids.catalogo.children[0].textContent,/Nenhuma/);});
+test('inicialização bem-sucedida habilita busca e encerra carregamento',async()=>{const d=dom();await initialize(d,async()=>({ok:true,json:async()=>[item()]}));assert.equal(d.ids['buscar-projeto'].disabled,false);assert.equal(d.ids.catalogo.attributes['aria-busy'],'false');d.ids['buscar-projeto'].value='vazio';d.ids['buscar-projeto'].listeners.input();assert.match(d.ids['catalogo-status'].textContent,/0 área/);});
+test('falha inicial preserva fallback e não deixa loader',async()=>{const d=dom();await initialize(d,async()=>({ok:false,status:403}));assert.equal(d.ids['buscar-projeto'].disabled,true);assert.match(d.ids['catalogo-status'].textContent,/links fixos/);assert.equal(d.ids.catalogo.attributes['aria-busy'],'false');});
+test('página sem catálogo não faz consulta',async()=>{await initialize({getElementById:()=>null},()=>{throw Error('não deveria chamar');});});
