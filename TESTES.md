@@ -24,4 +24,4 @@ https://vitorsemmao.github.io/Meu_Study_Hub_TI/
 - Deploy Pages verificado como success: https://github.com/VitorSemMao/Meu_Study_Hub_TI/actions/runs/39268373922
 
 ## Limites e pendências
-Não é um pentest completo, auditoria de conta ou teste em todos os dispositivos. A gestão de colaboradores e o salvamento da proteção de branch exigiram reautenticação do proprietário; não são declarados concluídos. Não foram testadas escritas não autorizadas usando contas de terceiros. O vídeo exigido permanece pendente e o envio acadêmico aguarda confirmação.
+Não é um pentest completo, auditoria de conta ou teste em todos os dispositivos. A gestão de colaboradores exigiu reautenticação. A proteção de main foi posteriormente confirmada na regra salva: exige PR e resolução das conversas, aplica-se aos administradores, sem force push ou exclusão; não exige aprovação externa nem checks de CI. O editor bloqueou commit direto e encaminhou a alteração a branch/PR. Não foram testadas escritas não autorizadas usando contas de terceiros. O vídeo exigido permanece pendente e o envio acadêmico aguarda confirmação.
